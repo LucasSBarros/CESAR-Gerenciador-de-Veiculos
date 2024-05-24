@@ -1,0 +1,16 @@
+services:
+  javaapp:
+    build: ./SistemaGerenciadorDeVeiculo/
+    command: sh -c "sleep 10s ; java ./SistemaGerenciadorDeVeiculo/src/main/java/br/com/fuctura/Aplicacao.java"
+    depends_on:
+      - db
+
+  db:
+    build: ./db/
+    restart: always
+    environment:
+      POSTGRES_DATABASE: 'db'
+      POSTGRES_USERNAME: 'postgres'
+      POSTGRES_PASSWORD: '12345'
+    ports:
+      - '3306:3306'

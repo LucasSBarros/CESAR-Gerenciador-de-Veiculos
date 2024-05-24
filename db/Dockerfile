@@ -1,3 +1,3 @@
-FROM postgresql:42.7
+FROM postgres:latest
 
 COPY Script.sql /docker-entrypoint-initdb.d/

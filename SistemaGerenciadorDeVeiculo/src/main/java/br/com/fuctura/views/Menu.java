@@ -86,7 +86,7 @@ public class Menu {
 
 		if (opcao.equals("1")) {
 
-			System.out.println("Digite uma das seguintes opções:\n" + "Opção a: Consultar Veículo por código\n"
+			System.out.println("Digite uma das seguintes opções:\n" + "Opção a: Consultar Veículo por placa\n"
 					+ "Opção b: Voltar para o menu superior\n");
 
 			String op = sc.nextLine();
@@ -96,8 +96,9 @@ public class Menu {
 				Veiculo veiculo = controladorVeiculos.buscar();
 				daoVeiculo.buscar(conn, veiculo);
 				daoVeiculo.instruir(conn, veiculo);
+				
 
-				Tipo tipo = controladorTipo.buscar();
+				Tipo tipo = controladorTipo.buscar(veiculo);
 				daoTipo.buscar(conn, tipo);
 
 				frenteDeLoja();
@@ -281,6 +282,11 @@ public class Menu {
 			} else if (op.equalsIgnoreCase("b")) {
 
 				Veiculo veiculo = controladorVeiculos.excluir();
+				daoVeiculo.instruir(conn, veiculo);
+				
+				Tipo tipo = controladorTipo.excluir(veiculo);
+				
+				daoTipo.excluir(conn, tipo);
 				daoVeiculo.excluir(conn, veiculo);
 
 				manutencaoNoCadastro();
@@ -289,6 +295,10 @@ public class Menu {
 
 				Veiculo veiculo = controladorVeiculos.alterar();
 				daoVeiculo.alterar(conn, veiculo);
+				daoVeiculo.instruir(conn, veiculo);
+				
+				Tipo tipo = controladorTipo.alterar(veiculo);
+				daoTipo.alterar(conn, tipo);
 
 				manutencaoNoCadastro();
 

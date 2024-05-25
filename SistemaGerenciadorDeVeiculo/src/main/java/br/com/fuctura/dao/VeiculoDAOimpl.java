@@ -37,11 +37,11 @@ public class VeiculoDAOimpl implements IVeiculoDAO {
 
 		try {
 
-			String comandoDelete = "DELETE FROM veiculo WHERE codigo_veiculo = ?;";
+			String comandoDelete = "DELETE FROM veiculo WHERE placa = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoDelete);
 
-			pstm.setInt(1, veiculo.getCodigo());
+			pstm.setString(1, veiculo.getPlaca());
 
 			pstm.execute();
 
@@ -56,16 +56,17 @@ public class VeiculoDAOimpl implements IVeiculoDAO {
 
 		try {
 
-			String comandoAlterar = "UPDATE veiculo SET codigo_loja = ?, placa = ?, modelo = ?, ano = ?, valor = ? WHERE codigo_veiculo = ?;";
+			String comandoAlterar = "UPDATE veiculo SET codigo_loja = ?, placa = ?, marca = ?, modelo = ?, ano = ?, valor = ? WHERE codigo_veiculo = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoAlterar);
 
 			pstm.setInt(1, veiculo.getCodigo_loja());
 			pstm.setString(2, veiculo.getPlaca());
-			pstm.setString(3, veiculo.getModelo());
-			pstm.setInt(4, veiculo.getAno());
-			pstm.setDouble(5, veiculo.getValor());
-			pstm.setInt(6, veiculo.getCodigo());
+			pstm.setString(3, veiculo.getMarca());
+			pstm.setString(4, veiculo.getModelo());
+			pstm.setInt(5, veiculo.getAno());
+			pstm.setDouble(6, veiculo.getValor());
+			pstm.setInt(7, veiculo.getCodigo());
 
 			pstm.execute();
 
@@ -80,11 +81,11 @@ public class VeiculoDAOimpl implements IVeiculoDAO {
 
 		try {
 
-			String comandoBuscar = "SELECT codigo_veiculo, codigo_loja, placa, modelo, ano, valor FROM veiculo WHERE codigo_veiculo = ?;";
+			String comandoBuscar = "SELECT codigo_veiculo, codigo_loja, placa, modelo, ano, valor FROM veiculo WHERE placa = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoBuscar);
 
-			pstm.setInt(1, veiculo.getCodigo());
+			pstm.setString(1, veiculo.getPlaca());
 
 			pstm.execute();
 
@@ -98,8 +99,6 @@ public class VeiculoDAOimpl implements IVeiculoDAO {
 				int ano = rs.getInt("ano");
 				double valor = rs.getDouble("valor");
 
-				System.out.println("Código do Veículo: " + codigo + ", Codigo da Loja: " + codigo_loja + ", Placa: "
-						+ placa + ", Modelo: " + modelo + ", Ano: " + ano + ", Valor: " + valor);
 			}
 
 		} catch (Exception e) {

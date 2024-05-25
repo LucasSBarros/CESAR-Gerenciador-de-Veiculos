@@ -93,8 +93,6 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 		veiculo.setAno(ano);
 		veiculo.setValor(valor);
 
-		System.out.println("Veículo cadastrado com sucesso!\n");
-		
 		return veiculo;
 
 	}
@@ -104,19 +102,19 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Digite o código do veículo que deseja buscar: ");
+		System.out.println("Digite a placa do veículo que deseja buscar: ");
 
-		while (!sc.hasNextInt()) {
-			System.out.println("ID inválido, tente novamente: ");
-			sc.next();
+		String placa = sc.nextLine().toUpperCase();
+
+		while (!Validadores.validarPlaca(placa)) {
+			System.out.println("Placa inválida, tente novamente: ");
+			placa = sc.nextLine().toUpperCase();
 		}
-
-		int codigo = sc.nextInt();
 
 		Veiculo veiculo = new Veiculo();
 
-		veiculo.setCodigo(codigo);
-		
+		veiculo.setPlaca(placa);
+
 		return veiculo;
 
 	}
@@ -137,7 +135,7 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 
 		sc.nextLine();
 
-		System.out.println("Altere a marca do veículo: ");
+		System.out.println("Digite a marca do veículo: ");
 		String marca = sc.nextLine();
 
 		while (!Validadores.validarMarca(marca)) {
@@ -145,7 +143,7 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 			marca = sc.nextLine();
 		}
 
-		System.out.println("Altere o modelo do veículo: ");
+		System.out.println("Digite o modelo do veículo: ");
 		String modelo = sc.nextLine();
 
 		while (!Validadores.validarModelo(modelo)) {
@@ -153,7 +151,7 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 			modelo = sc.nextLine();
 		}
 
-		System.out.println("Altere a placa do veículo: ");
+		System.out.println("Digite a placa do veículo: ");
 		String placa = sc.nextLine().toUpperCase();
 
 		while (!Validadores.validarPlaca(placa)) {
@@ -161,7 +159,7 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 			placa = sc.nextLine().toUpperCase();
 		}
 
-		System.out.println("Altere a categoria do veículo: ");
+		System.out.println("Digite a categoria do veículo: ");
 		String categoria = sc.nextLine();
 
 		while (!Validadores.validarCategoria(categoria)) {
@@ -169,7 +167,12 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 			categoria = sc.nextLine();
 		}
 
-		System.out.println("Altere o ano do veículo: ");
+		System.out.println("Digite o ano do veículo: ");
+		while (!sc.hasNextInt()) {
+			System.out.println("Ano inválido, tente novamente: ");
+			sc.next();
+		}
+
 		int ano = sc.nextInt();
 
 		while (!Validadores.validarAno(ano)) {
@@ -177,16 +180,37 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 			ano = sc.nextInt();
 		}
 
-		System.out.println("Altere o valor do veículo: ");
+		System.out.println("Digite o valor do veículo: ");
+
+		while (!sc.hasNextDouble()) {
+			System.out.println("Valor inválido, tente novamente: ");
+			sc.next();
+		}
+
 		double valor = sc.nextDouble();
 
 		while (!Validadores.validarValor(valor)) {
-			System.out.println("Valor inválido, tente novamente: ");
+			System.out.println("Preço inválido, tente novamente: ");
 			valor = sc.nextDouble();
+		}
+
+		System.out.println("Digite o código da Loja em que se encontra o Veículo: ");
+
+		while (!sc.hasNextInt()) {
+			System.out.println("Código da Loja inválido, tente novamente: ");
+			sc.next();
+		}
+
+		int codigo_loja = sc.nextInt();
+
+		while (!Validadores.validarValor(codigo_loja)) {
+			System.out.println("Código da Loja inválido inválido, tente novamente: ");
+			valor = sc.nextInt();
 		}
 
 		Veiculo veiculo = new Veiculo();
 
+		veiculo.setCodigo_loja(codigo_loja);
 		veiculo.setPlaca(placa);
 		veiculo.setMarca(marca);
 		veiculo.setModelo(modelo);
@@ -194,8 +218,6 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 		veiculo.setValor(valor);
 		veiculo.setCodigo(codigo);
 
-		System.out.println("Veículo alterado com sucesso!\n");
-		
 		return veiculo;
 
 	}
@@ -205,20 +227,21 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Digite o código do veículo que deseja excluir: ");
+		System.out.println("Digite a placa do veículo que deseja excluir: ");
 
-		while (!sc.hasNextInt()) {
-			System.out.println("Código inválido, tente novamente: ");
-			sc.next();
+		String placa = sc.nextLine().toUpperCase();
+
+		while (!Validadores.validarPlaca(placa)) {
+			System.out.println("Placa inválida, tente novamente: ");
+			placa = sc.nextLine().toUpperCase();
 		}
 
-		int codigo = sc.nextInt();
-
 		Veiculo veiculo = new Veiculo();
-		veiculo.setCodigo(codigo);
+
+		veiculo.setPlaca(placa);
 
 		System.out.println("Veículo excluído com sucesso!\n");
-		
+
 		return veiculo;
 
 	}

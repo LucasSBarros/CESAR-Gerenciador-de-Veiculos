@@ -33,11 +33,13 @@ public class TipoDAOimpl implements ITipoDAO {
 
 		try {
 
-			String comandoDelete = "DELETE FROM tipo WHERE codigo_tipo = ?;";
+			String comandoDelete = "DELETE FROM tipo WHERE codigo_veiculo = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoDelete);
+			
+			System.out.println(tipo.getCodigo_veiculo());
 
-			pstm.setInt(1, tipo.getCodigo());
+			pstm.setInt(1, tipo.getCodigo_veiculo());
 
 			pstm.execute();
 
@@ -52,14 +54,13 @@ public class TipoDAOimpl implements ITipoDAO {
 
 		try {
 
-			String comandoAlterar = "UPDATE tipo SET codigo_veiculo = ?, descricao = ? WHERE codigo_tipo = ?;";
+			String comandoAlterar = "UPDATE tipo SET descricao = ? WHERE codigo_veiculo = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoAlterar);
 
-			pstm.setInt(1, tipo.getCodigo_veiculo());
-			pstm.setString(2, tipo.getDescricao());
-			pstm.setInt(3, tipo.getCodigo());
-
+			pstm.setString(1, tipo.getDescricao());
+			pstm.setInt(2, tipo.getCodigo_veiculo());
+		
 			pstm.execute();
 
 		} catch (Exception e) {
@@ -73,11 +74,22 @@ public class TipoDAOimpl implements ITipoDAO {
 
 		try {
 
-			String comandoBuscar = "SELECT codigo_tipo, codigo_veiculo, descricao FROM tipo WHERE codigo_tipo = ?;";
+			String comandoBuscar = "SELECT Veiculo.codigo_veiculo, "
+					+ "Veiculo.codigo_loja, "
+					+ "Veiculo.placa, "
+					+ "Veiculo.marca, "
+					+ "Veiculo.modelo, "
+					+ "Veiculo.ano, "
+					+ "Veiculo.valor, "
+					+ "Tipo.codigo_tipo, "
+					+ "Tipo.codigo_veiculo, "
+					+ "Tipo.descricao "
+					+ "FROM Veiculo INNER JOIN Tipo ON Veiculo.codigo_veiculo = Tipo.codigo_veiculo "
+					+ "WHERE Tipo.codigo_veiculo = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoBuscar);
 
-			pstm.setInt(1, tipo.getCodigo());
+			pstm.setInt(1, tipo.getCodigo_veiculo());
 
 			pstm.execute();
 
@@ -86,10 +98,24 @@ public class TipoDAOimpl implements ITipoDAO {
 			while (rs.next()) {
 				int codigo = rs.getInt("codigo_tipo");
 				int codigo_veiculo = rs.getInt("codigo_veiculo");
+				int codigo_loja = rs.getInt("codigo_loja");
+				String placa = rs.getString("placa");
+				String marca = rs.getString("marca");
+				String modelo = rs.getString("modelo");
+				String ano = rs.getString("ano");
+				Double valor = rs.getDouble("valor");
 				String descricao = rs.getString("descricao");
 
 				System.out.println(
-						"Código: " + codigo + ", Codigo do Veículo: " + codigo_veiculo + ", Descrição: " + descricao);
+						 "\nCodigo do Veículo: " + codigo_veiculo + 
+						 "\nCódigo do Tipo: " + codigo +
+						 "\nCodigo da Loja: " + codigo_loja + 
+						 "\nPlaca: " + placa + 
+						 "\nMarca: " + marca + 
+						 "\nModelo: " + modelo + 
+						 "\nAno: " + ano + 
+						 "\nValor: " + valor + 
+						 "\nDescrição: " + descricao + "\n");
 			}
 
 		} catch (Exception e) {

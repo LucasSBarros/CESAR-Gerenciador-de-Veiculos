@@ -25,30 +25,21 @@ public class ControladorTipo implements ITipoCRUD {
 		tipo.setCodigo_veiculo(veiculo.getCodigo());
 		tipo.setDescricao(descricao);
 
-		System.out.println("Tipo cadastrado com sucesso!\n");
-		
+		System.out.println("Veículo cadastrado com sucesso!\n");
+
 		return tipo;
 
 	}
 
 	@Override
-	public Tipo buscar() {
+	public Tipo buscar(Veiculo veiculo) {
 
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println("Digite o código do tipo que deseja buscar: ");
-
-		while (!sc.hasNextInt()) {
-			System.out.println("ID inválido, tente novamente: ");
-			sc.next();
-		}
-
-		int codigo = sc.nextInt();
+		int codigo_veiculo = veiculo.getCodigo();
 
 		Tipo tipo = new Tipo();
 
-		tipo.setCodigo(codigo);
-		
+		tipo.setCodigo_veiculo(codigo_veiculo);
+
 		return tipo;
 
 	}
@@ -58,16 +49,7 @@ public class ControladorTipo implements ITipoCRUD {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Digite o código do tipo que deseja alterar: ");
-
-		while (!sc.hasNextInt()) {
-			System.out.println("Código inválido, tente novamente: ");
-			sc.next();
-		}
-
-		int codigo = sc.nextInt();
-
-		sc.nextLine();
+		int codigo_veiculo = veiculo.getCodigo();
 
 		System.out.println("Digite a descrição do veículo: ");
 		String descricao = sc.nextLine();
@@ -79,35 +61,24 @@ public class ControladorTipo implements ITipoCRUD {
 
 		Tipo tipo = new Tipo();
 
-		tipo.setCodigo_veiculo(veiculo.getCodigo());
+		tipo.setCodigo_veiculo(codigo_veiculo);
 		tipo.setDescricao(descricao);
-		veiculo.setCodigo(codigo);
 
-		System.out.println("Tipo alterado com sucesso!\n");
-		
+		System.out.println("Veículo alterado com sucesso!\n");
+
 		return tipo;
 
 	}
 
 	@Override
-	public Tipo excluir() {
+	public Tipo excluir(Veiculo veiculo) {
 
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println("Digite o código do tipo que deseja excluir: ");
-
-		while (!sc.hasNextInt()) {
-			System.out.println("Código inválido, tente novamente: ");
-			sc.next();
-		}
-
-		int codigo = sc.nextInt();
+		int codigo_veiculo = veiculo.getCodigo();
 
 		Tipo tipo = new Tipo();
-		tipo.setCodigo(codigo);
 
-		System.out.println("Tipo excluído com sucesso!\n");
-		
+		tipo.setCodigo_veiculo(codigo_veiculo);
+
 		return tipo;
 
 	}

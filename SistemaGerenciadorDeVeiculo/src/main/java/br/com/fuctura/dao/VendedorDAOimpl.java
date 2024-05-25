@@ -34,11 +34,11 @@ public class VendedorDAOimpl implements IVendedorDAO {
 
 		try {
 
-			String comandoDelete = "DELETE FROM vendedor WHERE codigo_vendedor = ?;";
+			String comandoDelete = "DELETE FROM vendedor WHERE nome = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoDelete);
 
-			pstm.setInt(1, vendedor.getCodigo());
+			pstm.setString(1, vendedor.getNome());
 
 			pstm.execute();
 
@@ -75,11 +75,11 @@ public class VendedorDAOimpl implements IVendedorDAO {
 
 		try {
 
-			String comandoBuscar = "SELECT codigo_vendedor, nome, cpf, celular FROM vendedor WHERE codigo_vendedor = ?;";
+			String comandoBuscar = "SELECT codigo_vendedor, nome, cpf, celular FROM vendedor WHERE nome = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoBuscar);
 
-			pstm.setInt(1, vendedor.getCodigo());
+			pstm.setString(1, vendedor.getNome());
 
 			pstm.execute();
 

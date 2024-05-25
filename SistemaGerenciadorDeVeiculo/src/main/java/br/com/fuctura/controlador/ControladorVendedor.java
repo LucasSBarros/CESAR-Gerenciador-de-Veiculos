@@ -41,7 +41,7 @@ public class ControladorVendedor implements IVendedorCRUD {
 		vendedor.setCpf(cpf);
 		vendedor.setCelular(celular);
 
-		System.out.println("Vendedor cadastrado com sucesso!\n");	
+		System.out.println("Vendedor cadastrado com sucesso!\n");
 
 		return vendedor;
 
@@ -52,19 +52,19 @@ public class ControladorVendedor implements IVendedorCRUD {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Digite o código do vendedor que deseja buscar: ");
+		System.out.println("Digite o nome do vendedor que deseja buscar: ");
 
-		while (!sc.hasNextInt()) {
-			System.out.println("Código inválido, tente novamente: ");
-			sc.next();
+		String nome = sc.nextLine();
+
+		while (!Validadores.validarNome(nome)) {
+			System.out.println("Nome inválido, tente novamente: ");
+			nome = sc.nextLine();
 		}
-
-		int codigo = sc.nextInt();
 
 		Vendedor vendedor = new Vendedor();
 
-		vendedor.setCodigo(codigo);
-		
+		vendedor.setNome(nome);
+
 		return vendedor;
 
 	}
@@ -117,7 +117,7 @@ public class ControladorVendedor implements IVendedorCRUD {
 		vendedor.setCodigo(codigo);
 
 		System.out.println("Vendedor alterado com sucesso!\n");
-		
+
 		return vendedor;
 
 	}
@@ -127,21 +127,21 @@ public class ControladorVendedor implements IVendedorCRUD {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Digite o código do vendedor que deseja excluir: ");
+		System.out.println("Digite o nome do vendedor que deseja excluir: ");
 
-		while (!sc.hasNextInt()) {
-			System.out.println("Código inválido, tente novamente: ");
-			sc.next();
+		String nome = sc.nextLine();
+
+		while (!Validadores.validarNome(nome)) {
+			System.out.println("Nome inválido, tente novamente: ");
+			nome = sc.nextLine();
 		}
-
-		int codigo = sc.nextInt();
 
 		Vendedor vendedor = new Vendedor();
 
-		vendedor.setCodigo(codigo);
+		vendedor.setNome(nome);
 
 		System.out.println("Vendedor excluído com sucesso!\n");
-		
+
 		return vendedor;
 
 	}

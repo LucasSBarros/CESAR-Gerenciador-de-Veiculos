@@ -20,7 +20,7 @@ import br.com.fuctura.dao.VendedorDAOimpl;
 import br.com.fuctura.entidade.*;
 
 public class Menu {
-	
+
 	private Connection conn;
 
 	public Menu(Connection conn) {
@@ -32,7 +32,9 @@ public class Menu {
 	ControladorLoja controladorLoja = new ControladorLoja();
 	ControladorVeiculos controladorVeiculos = new ControladorVeiculos();
 	ControladorVenda controladorVenda = new ControladorVenda();
-	
+	ControladorEndereco controladorEndereco = new ControladorEndereco();
+	ControladorTipo controladorTipo = new ControladorTipo();
+
 	IClienteDAO daoCliente = new ClienteDAOImpl();
 	IEnderecoDAO daoEndereco = new EnderecoDAOImpl();
 	ILojaDAO daoLoja = new LojaDAOimpl();
@@ -48,19 +50,25 @@ public class Menu {
 		System.out.println("Digite uma das seguintes opções:\n" + "Opção 1: Frente de Loja\n"
 				+ "Opção 2: Manutenção no Cadastro\n" + "Opção 3: Sair\n");
 
-		int opcao = sc.nextInt();
+		String opcao = sc.nextLine();
 
-		if (opcao == 1) {
+		if (opcao.equals("1")) {
 
 			frenteDeLoja();
 
-		} else if (opcao == 2) {
+		} else if (opcao.equals("2")) {
 
 			manutencaoNoCadastro();
 
-		} else if (opcao == 3) {
+		} else if (opcao.equals("3")) {
 
 			System.out.println("Encerramento ...");
+
+		} else {
+
+			System.out.println("Opção inválida, tente novamente! \n");
+
+			interfaceUsuario();
 
 		}
 
@@ -74,11 +82,9 @@ public class Menu {
 				+ "Opção 2: Gerenciar Loja\n" + "Opção 3: Gerenciar Vendedor\n" + "Opção 4: Gerenciar Cliente\n"
 				+ "Opção 5: Gerenciar Venda\n" + "Opção 6: Voltar para o menu superior\n");
 
-		int opcao = sc.nextInt();
+		String opcao = sc.nextLine();
 
-		if (opcao == 1) {
-
-			sc.nextLine();
+		if (opcao.equals("1")) {
 
 			System.out.println("Digite uma das seguintes opções:\n" + "Opção a: Consultar Veículo por código\n"
 					+ "Opção b: Voltar para o menu superior\n");
@@ -89,7 +95,11 @@ public class Menu {
 
 				Veiculo veiculo = controladorVeiculos.buscar();
 				daoVeiculo.buscar(conn, veiculo);
-				
+				daoVeiculo.instruir(conn, veiculo);
+
+				Tipo tipo = controladorTipo.buscar();
+				daoTipo.buscar(conn, tipo);
+
 				frenteDeLoja();
 
 			} else if (op.equalsIgnoreCase("b")) {
@@ -103,9 +113,7 @@ public class Menu {
 
 			}
 
-		} else if (opcao == 2) {
-
-			sc.nextLine();
+		} else if (opcao.equals("2")) {
 
 			System.out.println("Digite uma das seguintes opções:\n" + "Opção a: Buscar Loja por código\n"
 					+ "Opção b: Voltar para o menu superior\n");
@@ -116,7 +124,10 @@ public class Menu {
 
 				Loja loja = controladorLoja.buscar();
 				daoLoja.buscar(conn, loja);
-				
+
+				Endereco endereco = controladorEndereco.buscar();
+				daoEndereco.buscar(conn, endereco);
+
 				frenteDeLoja();
 
 			} else if (op.equalsIgnoreCase("b")) {
@@ -130,9 +141,7 @@ public class Menu {
 
 			}
 
-		} else if (opcao == 3) {
-
-			sc.nextLine();
+		} else if (opcao.equals("3")) {
 
 			System.out.println("Digite uma das seguintes opções:\n" + "Opção a: Consultar Vendedor por código\n"
 					+ "Opção b: Voltar para o menu superior\n");
@@ -156,9 +165,7 @@ public class Menu {
 
 			}
 
-		} else if (opcao == 4) {
-
-			sc.nextLine();
+		} else if (opcao.equals("4")) {
 
 			System.out.println("Digite uma das seguintes opções:\n" + "Opção a: Cadastrar Cliente\n"
 					+ "Opção b: Consultar Cliente por código\n" + "Opção c: Voltar para o menu superior\n");
@@ -169,13 +176,21 @@ public class Menu {
 
 				Cliente cliente = controladorCliente.cadastrar();
 				daoCliente.salvar(conn, cliente);
-				
+				daoCliente.instruir(conn, cliente);
+
+				Endereco endereco = controladorEndereco.cadastrar(cliente);
+				daoEndereco.salvarCliente(conn, endereco);
+
 				frenteDeLoja();
 
 			} else if (op.equalsIgnoreCase("b")) {
 
 				Cliente cliente = controladorCliente.buscar();
 				daoCliente.buscar(conn, cliente);
+
+				Endereco endereco = controladorEndereco.buscar();
+				daoEndereco.buscar(conn, endereco);
+
 				frenteDeLoja();
 
 			} else if (op.equalsIgnoreCase("c")) {
@@ -189,9 +204,7 @@ public class Menu {
 
 			}
 
-		} else if (opcao == 5) {
-
-			sc.nextLine();
+		} else if (opcao.equals("5")) {
 
 			System.out.println("Digite uma das seguintes opções:\n" + "Opção a: Cadastrar venda\n"
 					+ "Opção b: Consultar Venda por código\n" + "Opção c: Voltar para o menu superior\n");
@@ -202,14 +215,14 @@ public class Menu {
 
 				Venda venda = controladorVenda.cadastrar();
 				daoVenda.salvar(conn, venda);
-				
+
 				frenteDeLoja();
 
 			} else if (op.equalsIgnoreCase("b")) {
 
 				Venda venda = controladorVenda.buscar();
 				daoVenda.buscar(conn, venda);
-				
+
 				frenteDeLoja();
 
 			} else if (op.equalsIgnoreCase("c")) {
@@ -223,7 +236,7 @@ public class Menu {
 
 			}
 
-		} else if (opcao == 6) {
+		} else if (opcao.equals("6")) {
 
 			interfaceUsuario();
 
@@ -244,15 +257,13 @@ public class Menu {
 
 		Scanner sc = new Scanner(System.in);
 
-		int opcao = sc.nextInt();
+		String opcao = sc.nextLine();
 
-		if (opcao == 1) {
+		if (opcao.equals("1")) {
 
-			sc.nextLine();
-
-			System.out.println("Digite uma das seguintes opções:\n" + "Opção a: Cadastrar veículo\n"
-					+ "Opção b: Excluir veículo\n" + "Opção c: Alterar dados do veículo\n"
-					+ "Opção d: Voltar para o menu superior\n");
+			System.out.println(
+					"Digite uma das seguintes opções:\n" + "Opção a: Cadastrar veículo\n" + "Opção b: Excluir veículo\n"
+							+ "Opção c: Alterar dados do veículo\n" + "Opção d: Voltar para o menu superior\n");
 
 			String op = sc.nextLine();
 
@@ -260,21 +271,25 @@ public class Menu {
 
 				Veiculo veiculo = controladorVeiculos.cadastrar();
 				daoVeiculo.salvar(conn, veiculo);
-				
+				daoVeiculo.instruir(conn, veiculo);
+
+				Tipo tipo = controladorTipo.cadastrar(veiculo);
+				daoTipo.salvar(conn, tipo);
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("b")) {
 
 				Veiculo veiculo = controladorVeiculos.excluir();
 				daoVeiculo.excluir(conn, veiculo);
-				
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("c")) {
 
 				Veiculo veiculo = controladorVeiculos.alterar();
 				daoVeiculo.alterar(conn, veiculo);
-				
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("d")) {
@@ -288,9 +303,7 @@ public class Menu {
 
 			}
 
-		} else if (opcao == 2) {
-
-			sc.nextLine();
+		} else if (opcao.equals("2")) {
 
 			System.out.println(
 					"Digite uma das seguintes opções:\n" + "Opção a: Cadastrar Loja\n" + "Opção b: Excluir Loja\n"
@@ -302,21 +315,25 @@ public class Menu {
 
 				Loja loja = controladorLoja.cadastrar();
 				daoLoja.salvar(conn, loja);
-				
+				daoLoja.instruir(conn, loja);
+
+				Endereco endereco = controladorEndereco.cadastrar(loja);
+				daoEndereco.salvarLoja(conn, endereco);
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("b")) {
 
 				Loja loja = controladorLoja.excluir();
 				daoLoja.excluir(conn, loja);
-				
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("c")) {
 
 				Loja loja = controladorLoja.alterar();
 				daoLoja.alterar(conn, loja);
-				
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("d")) {
@@ -330,9 +347,7 @@ public class Menu {
 
 			}
 
-		} else if (opcao == 3) {
-
-			sc.nextLine();
+		} else if (opcao.equals("3")) {
 
 			System.out.println("Digite uma das seguintes opções:\n" + "Opção a: Cadastrar Vendedor\n"
 					+ "Opção b: Excluir Vendedor\n" + "Opção c: Alterar dados do Vendedor\n"
@@ -344,21 +359,21 @@ public class Menu {
 
 				Vendedor vendedor = controladorVendedor.cadastrar();
 				daoVendedor.salvar(conn, vendedor);
-				
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("b")) {
 
 				Vendedor vendedor = controladorVendedor.excluir();
 				daoVendedor.excluir(conn, vendedor);
-				
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("c")) {
 
 				Vendedor vendedor = controladorVendedor.alterar();
 				daoVendedor.alterar(conn, vendedor);
-				
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("d")) {
@@ -372,13 +387,11 @@ public class Menu {
 
 			}
 
-		} else if (opcao == 4) {
+		} else if (opcao.equals("4")) {
 
-			sc.nextLine();
-
-			System.out.println("Digite uma das seguintes opções:\n" + "Opção a: Cadastrar Cliente\n"
-					+ "Opção b: Excluir Cliente\n" + "Opção c: Alterar dados do Cliente\n"
-					+ "Opção d: Voltar para o menu superior\n");
+			System.out.println(
+					"Digite uma das seguintes opções:\n" + "Opção a: Cadastrar Cliente\n" + "Opção b: Excluir Cliente\n"
+							+ "Opção c: Alterar dados do Cliente\n" + "Opção d: Voltar para o menu superior\n");
 
 			String op = sc.nextLine();
 
@@ -386,21 +399,25 @@ public class Menu {
 
 				Cliente cliente = controladorCliente.cadastrar();
 				daoCliente.salvar(conn, cliente);
-				
+				daoCliente.instruir(conn, cliente);
+
+				Endereco endereco = controladorEndereco.cadastrar(cliente);
+				daoEndereco.salvarCliente(conn, endereco);
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("b")) {
 
 				Cliente cliente = controladorCliente.excluir();
 				daoCliente.excluir(conn, cliente);
-				
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("c")) {
 
 				Cliente cliente = controladorCliente.alterar();
 				daoCliente.alterar(conn, cliente);
-				
+
 				manutencaoNoCadastro();
 
 			} else if (op.equalsIgnoreCase("d")) {
@@ -414,9 +431,7 @@ public class Menu {
 
 			}
 
-		} else if (opcao == 5) {
-
-			sc.nextLine();
+		} else if (opcao.equals("5")) {
 
 			System.out.println("Digite uma das seguintes opções:\n" + "Opção a: Cadastrar Venda\n"
 					+ "Opção b: Excluir Venda\n" + "Opção c: Voltar para o menu superior\n");
@@ -427,15 +442,14 @@ public class Menu {
 
 				Venda venda = controladorVenda.cadastrar();
 				daoVenda.salvar(conn, venda);
-				
-				
+
 				manutencaoNoCadastro();
 
 			} else if (op.equals("b")) {
 
 				Venda venda = controladorVenda.excluir();
 				daoVenda.excluir(conn, venda);
-				
+
 				manutencaoNoCadastro();
 
 			} else if (op.equals("c")) {
@@ -449,7 +463,7 @@ public class Menu {
 
 			}
 
-		} else if (opcao == 6) {
+		} else if (opcao.equals("6")) {
 
 			interfaceUsuario();
 

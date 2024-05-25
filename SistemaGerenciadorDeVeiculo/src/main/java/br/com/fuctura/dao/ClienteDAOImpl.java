@@ -13,7 +13,7 @@ public class ClienteDAOImpl implements IClienteDAO {
 
 		try {
 
-			String comandoInsert = "INSERT INTO cliente (nome, cpf, celular)\r\n" + "VALUES (?, ?, ?);";
+			String comandoInsert = "INSERT INTO cliente (nome, cpf, celular) VALUES (?, ?, ?);";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoInsert);
 
@@ -90,15 +90,41 @@ public class ClienteDAOImpl implements IClienteDAO {
 				String cpf = rs.getString("cpf");
 				String celular = rs.getString("celular");
 
-				System.out.println("Código: " + codigo 
-						+ ", Nome: " + nome 
-						+ ", CPF: " + cpf 
-						+ ", Celular: " + celular);
+				System.out.println("Código: " + codigo + ", Nome: " + nome + ", CPF: " + cpf + ", Celular: " + celular);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	public Cliente instruir(Connection conn, Cliente cliente) {
+
+		try {
+
+			String comandoBuscar = "SELECT codigo_cliente FROM cliente WHERE cpf = ?;";
+
+			PreparedStatement pstm = conn.prepareStatement(comandoBuscar);
+
+			pstm.setString(1, cliente.getCpf());
+
+			pstm.execute();
+
+			ResultSet rs = pstm.executeQuery();
+
+			while (rs.next()) {
+
+				int codigo = rs.getInt("codigo_cliente");
+
+				cliente.setCodigo(codigo);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cliente;
 
 	}
 

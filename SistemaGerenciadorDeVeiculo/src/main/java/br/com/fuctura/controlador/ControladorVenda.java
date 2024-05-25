@@ -11,54 +11,52 @@ public class ControladorVenda implements IVendaCRUD {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Digite o código da Loja: ");
-		
+
 		while (!sc.hasNextInt()) {
 			System.out.println("Código inválido, tente novamente: ");
 			sc.next();
 		}
-		
+
 		int codigo_loja = sc.nextInt();
-		
+
 		System.out.println("Digite o código do cliente comprador: ");
-		
+
 		while (!sc.hasNextInt()) {
 			System.out.println("Código inválido, tente novamente: ");
 			sc.next();
 		}
-		
+
 		int codigo_cliente = sc.nextInt();
-	
+
 		System.out.println("Digite o códigodo vendedor responsável pela venda: ");
-		
+
 		while (!sc.hasNextInt()) {
 			System.out.println("Código inválido, tente novamente: ");
 			sc.next();
 		}
-		
+
 		int codigo_vendedor = sc.nextInt();
 
-		
-		
 		System.out.println("Digite o valor da venda realizada: ");
-		
+
 		while (!sc.hasNextDouble()) {
 			System.out.println("Código inválido, tente novamente: ");
 			sc.next();
 		}
-		
+
 		double valor = sc.nextDouble();
 
 		Venda venda = new Venda();
-		
+
 		venda.setCodigo_loja(codigo_loja);
 		venda.setCodigo_cliente(codigo_cliente);
 		venda.setCodigo_vendedor(codigo_vendedor);
 		venda.setValor(valor);
-		
+
 		System.out.println("Venda realizada com Sucesso!\n");
 		
 		return venda;
-		
+
 	}
 
 	public Venda buscar() {
@@ -73,15 +71,15 @@ public class ControladorVenda implements IVendaCRUD {
 		}
 
 		int codigo = sc.nextInt();
-		
+
 		Venda venda = new Venda();
-		
+
 		venda.setCodigo(codigo);
 		
 		return venda;
 
 	}
-	
+
 	@Override
 	public Venda alterar() {
 		// TODO Auto-generated method stub
@@ -100,15 +98,15 @@ public class ControladorVenda implements IVendaCRUD {
 		}
 
 		int codigo = sc.nextInt();
-		
+
 		Venda venda = new Venda();
-		
+
 		venda.setCodigo(codigo);
-		
+
 		System.out.println("Venda excluída com sucesso!\n");
 		
 		return venda;
-	
+
 	}
 
 }

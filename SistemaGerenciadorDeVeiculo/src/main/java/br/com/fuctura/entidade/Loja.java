@@ -4,6 +4,7 @@ public class Loja {
 
 	private int codigo;
 	private String nome;
+	private String cnpj;
 	private String telefone;
 
 	public int getCodigo() {
@@ -30,4 +31,11 @@ public class Loja {
 		this.telefone = telefone;
 	}
 
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
 }

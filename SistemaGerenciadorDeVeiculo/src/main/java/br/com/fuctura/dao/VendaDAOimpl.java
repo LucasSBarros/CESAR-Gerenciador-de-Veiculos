@@ -10,10 +10,10 @@ public class VendaDAOimpl implements IVendaDAO {
 
 	@Override
 	public void salvar(Connection conn, Venda venda) {
-		
+
 		try {
 
-			String comandoInsert = "INSERT INTO venda (codigo_loja, codigo_cliente, codigo_vendedor, valor)\r\n" + "VALUES (?, ?, ?, ?);";
+			String comandoInsert = "INSERT INTO venda (codigo_loja, codigo_cliente, codigo_vendedor, valor) VALUES (?, ?, ?, ?);";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoInsert);
 
@@ -21,7 +21,7 @@ public class VendaDAOimpl implements IVendaDAO {
 			pstm.setInt(2, venda.getCodigo_cliente());
 			pstm.setInt(3, venda.getCodigo_vendedor());
 			pstm.setDouble(4, venda.getValor());
-			
+
 			pstm.execute();
 
 		} catch (Exception e) {
@@ -32,7 +32,7 @@ public class VendaDAOimpl implements IVendaDAO {
 
 	@Override
 	public void excluir(Connection conn, Venda venda) {
-		
+
 		try {
 
 			String comandoDelete = "DELETE FROM venda WHERE codigo_venda = ?;";
@@ -51,7 +51,7 @@ public class VendaDAOimpl implements IVendaDAO {
 
 	@Override
 	public void alterar(Connection conn, Venda venda) {
-		
+
 		try {
 
 			String comandoAlterar = "UPDATE venda SET codigo_loja = ?, codigo_cliente = ?, codigo_vendedor = ?, valor = ? WHERE codigo_venda = ?;";
@@ -74,7 +74,7 @@ public class VendaDAOimpl implements IVendaDAO {
 
 	@Override
 	public void buscar(Connection conn, Venda venda) {
-		
+
 		try {
 
 			String comandoBuscar = "SELECT codigo_venda, codigo_loja, codigo_cliente, codigo_vendedor, valor FROM venda WHERE codigo_venda = ?;";
@@ -94,11 +94,9 @@ public class VendaDAOimpl implements IVendaDAO {
 				int codigo_vendedor = rs.getInt("codigo_vendedor");
 				double valor = rs.getDouble("valor");
 
-				System.out.println("Código da Venda: " + codigo 
-						+ ", Código da Loja: " + codigo_loja 
-						+ ", Código do Cliente: " + codigo_cliente 
-						+ ", Código do Vendedor: " + codigo_vendedor 
-						+ ", Valor: " + valor);
+				System.out.println(
+						"Código da Venda: " + codigo + ", Código da Loja: " + codigo_loja + ", Código do Cliente: "
+								+ codigo_cliente + ", Código do Vendedor: " + codigo_vendedor + ", Valor: " + valor);
 			}
 
 		} catch (Exception e) {

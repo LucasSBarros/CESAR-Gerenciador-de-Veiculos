@@ -13,7 +13,7 @@ public class VendedorDAOimpl implements IVendedorDAO {
 
 		try {
 
-			String comandoInsert = "INSERT INTO vendedor (nome, cpf, celular)\r\n" + "VALUES (?, ?, ?);";
+			String comandoInsert = "INSERT INTO vendedor (nome, cpf, celular) VALUES (?, ?, ?);";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoInsert);
 
@@ -91,10 +91,7 @@ public class VendedorDAOimpl implements IVendedorDAO {
 				String cpf = rs.getString("cpf");
 				String celular = rs.getString("celular");
 
-				System.out.println("Código: " + codigo 
-						+ ", Nome: " + nome 
-						+ ", CPF: " + cpf 
-						+ ", Celular: " + celular);
+				System.out.println("Código: " + codigo + ", Nome: " + nome + ", CPF: " + cpf + ", Celular: " + celular);
 			}
 
 		} catch (Exception e) {

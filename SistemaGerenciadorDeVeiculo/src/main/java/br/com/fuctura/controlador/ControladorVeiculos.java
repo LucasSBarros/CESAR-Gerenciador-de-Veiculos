@@ -44,7 +44,6 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 		}
 
 		System.out.println("Digite o ano do veículo: ");
-
 		while (!sc.hasNextInt()) {
 			System.out.println("Ano inválido, tente novamente: ");
 			sc.next();
@@ -71,8 +70,23 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 			valor = sc.nextDouble();
 		}
 
+		System.out.println("Digite o código da Loja em que se encontra o Veículo: ");
+
+		while (!sc.hasNextInt()) {
+			System.out.println("Código da Loja inválido, tente novamente: ");
+			sc.next();
+		}
+
+		int codigo_loja = sc.nextInt();
+
+		while (!Validadores.validarValor(codigo_loja)) {
+			System.out.println("Código da Loja inválido inválido, tente novamente: ");
+			valor = sc.nextInt();
+		}
+
 		Veiculo veiculo = new Veiculo();
 
+		veiculo.setCodigo_loja(codigo_loja);
 		veiculo.setPlaca(placa);
 		veiculo.setMarca(marca);
 		veiculo.setModelo(modelo);
@@ -80,7 +94,7 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 		veiculo.setValor(valor);
 
 		System.out.println("Veículo cadastrado com sucesso!\n");
-
+		
 		return veiculo;
 
 	}
@@ -90,7 +104,7 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Digite o código do veículo que deseja alterar: ");
+		System.out.println("Digite o código do veículo que deseja buscar: ");
 
 		while (!sc.hasNextInt()) {
 			System.out.println("ID inválido, tente novamente: ");
@@ -102,7 +116,7 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 		Veiculo veiculo = new Veiculo();
 
 		veiculo.setCodigo(codigo);
-
+		
 		return veiculo;
 
 	}
@@ -181,7 +195,7 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 		veiculo.setCodigo(codigo);
 
 		System.out.println("Veículo alterado com sucesso!\n");
-
+		
 		return veiculo;
 
 	}
@@ -204,7 +218,7 @@ public class ControladorVeiculos implements IVeiculoCRUD {
 		veiculo.setCodigo(codigo);
 
 		System.out.println("Veículo excluído com sucesso!\n");
-
+		
 		return veiculo;
 
 	}

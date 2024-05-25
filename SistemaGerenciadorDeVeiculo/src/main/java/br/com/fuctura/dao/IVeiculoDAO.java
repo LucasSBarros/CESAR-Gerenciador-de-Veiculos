@@ -14,4 +14,6 @@ public interface IVeiculoDAO {
 
 	void buscar(Connection conn, Veiculo veiculo);
 
+	Veiculo instruir(Connection conn, Veiculo veiculo);
+
 }

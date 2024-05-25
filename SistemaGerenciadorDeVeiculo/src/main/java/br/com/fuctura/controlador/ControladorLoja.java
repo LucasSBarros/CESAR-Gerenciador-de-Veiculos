@@ -19,7 +19,17 @@ public class ControladorLoja implements ILojaCRUD {
 			nome = sc.nextLine();
 		}
 
+		System.out.println("Digite o CNPJ da loja: ");
+
+		String cnpj = sc.nextLine();
+
+		while (!Validadores.validarCnpj(cnpj)) {
+			System.out.println("CNPJ inválido, tente novamente: ");
+			cnpj = sc.nextLine();
+		}
+
 		System.out.println("Digite o Telefone da loja: ");
+
 		String telefone = sc.nextLine();
 
 		while (!Validadores.validarTelefone(telefone)) {
@@ -30,10 +40,9 @@ public class ControladorLoja implements ILojaCRUD {
 		Loja loja = new Loja();
 
 		loja.setNome(nome);
+		loja.setCnpj(cnpj);
 		loja.setTelefone(telefone);
-
-		System.out.println("Loja cadastrada com sucesso!\n");
-
+		
 		return loja;
 	}
 
@@ -54,7 +63,7 @@ public class ControladorLoja implements ILojaCRUD {
 		Loja loja = new Loja();
 
 		loja.setCodigo(codigo);
-
+		
 		return loja;
 
 	}
@@ -83,6 +92,15 @@ public class ControladorLoja implements ILojaCRUD {
 			nome = sc.nextLine();
 		}
 
+		System.out.println("Digite o CNPJ da loja: ");
+
+		String cnpj = sc.nextLine();
+
+		while (!Validadores.validarCnpj(cnpj)) {
+			System.out.println("CNPJ inválido, tente novamente: ");
+			cnpj = sc.nextLine();
+		}
+
 		System.out.println("Altere o telefone da loja: ");
 		String telefone = sc.nextLine();
 
@@ -94,11 +112,12 @@ public class ControladorLoja implements ILojaCRUD {
 		Loja loja = new Loja();
 
 		loja.setNome(nome);
+		loja.setCnpj(cnpj);
 		loja.setTelefone(telefone);
 		loja.setCodigo(codigo);
 
 		System.out.println("Loja alterada com sucesso!\n");
-
+		
 		return loja;
 
 	}

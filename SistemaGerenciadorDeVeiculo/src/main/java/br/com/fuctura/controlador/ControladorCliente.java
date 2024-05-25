@@ -41,8 +41,6 @@ public class ControladorCliente implements IClienteCRUD {
 		cliente.setCpf(cpf);
 		cliente.setCelular(celular);
 
-		System.out.println("Cliente cadastrado com sucesso!\n");
-
 		return cliente;
 	}
 
@@ -63,7 +61,7 @@ public class ControladorCliente implements IClienteCRUD {
 		Cliente cliente = new Cliente();
 
 		cliente.setCodigo(codigo);
-
+		
 		return cliente;
 
 	}
@@ -116,7 +114,7 @@ public class ControladorCliente implements IClienteCRUD {
 		cliente.setCodigo(codigo);
 
 		System.out.println("Cliente alterado com sucesso!\n");
-
+		
 		return cliente;
 
 	}
@@ -140,7 +138,7 @@ public class ControladorCliente implements IClienteCRUD {
 		cliente.setCodigo(codigo);
 
 		System.out.println("Cliente excluído com sucesso!\n");
-
+		
 		return cliente;
 
 	}

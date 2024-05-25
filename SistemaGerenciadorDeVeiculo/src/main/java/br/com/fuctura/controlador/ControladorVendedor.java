@@ -41,7 +41,7 @@ public class ControladorVendedor implements IVendedorCRUD {
 		vendedor.setCpf(cpf);
 		vendedor.setCelular(celular);
 
-		System.out.println("Vendedor cadastrado com sucesso!\n");
+		System.out.println("Vendedor cadastrado com sucesso!\n");	
 
 		return vendedor;
 
@@ -64,7 +64,7 @@ public class ControladorVendedor implements IVendedorCRUD {
 		Vendedor vendedor = new Vendedor();
 
 		vendedor.setCodigo(codigo);
-
+		
 		return vendedor;
 
 	}
@@ -117,7 +117,7 @@ public class ControladorVendedor implements IVendedorCRUD {
 		vendedor.setCodigo(codigo);
 
 		System.out.println("Vendedor alterado com sucesso!\n");
-
+		
 		return vendedor;
 
 	}
@@ -141,7 +141,7 @@ public class ControladorVendedor implements IVendedorCRUD {
 		vendedor.setCodigo(codigo);
 
 		System.out.println("Vendedor excluído com sucesso!\n");
-
+		
 		return vendedor;
 
 	}

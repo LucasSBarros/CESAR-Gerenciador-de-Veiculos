@@ -14,4 +14,6 @@ public interface ILojaDAO {
 
 	void buscar(Connection conn, Loja loja);
 
+	Loja instruir(Connection conn, Loja loja);
+
 }

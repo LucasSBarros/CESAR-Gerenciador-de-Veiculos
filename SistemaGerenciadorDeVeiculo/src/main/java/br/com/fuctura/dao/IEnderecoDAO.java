@@ -6,11 +6,15 @@ import br.com.fuctura.entidade.Endereco;
 
 public interface IEnderecoDAO {
 
-	void salvar(Connection conn, Endereco endereco);
+	void salvarLoja(Connection conn, Endereco endereco);
+
+	void salvarCliente(Connection conn, Endereco endereco);
 
 	void excluir(Connection conn, Endereco endereco);
 
-	void alterar(Connection conn, Endereco endereco);
+	void alterarLoja(Connection conn, Endereco endereco);
+
+	void alterarCliente(Connection conn, Endereco endereco);
 
 	void buscar(Connection conn, Endereco endereco);
 

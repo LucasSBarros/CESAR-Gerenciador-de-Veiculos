@@ -14,4 +14,6 @@ public interface IClienteDAO {
 
 	void buscar(Connection conn, Cliente cliente);
 
+	Cliente instruir(Connection conn, Cliente cliente);
+
 }

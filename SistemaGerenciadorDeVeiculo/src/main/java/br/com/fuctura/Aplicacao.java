@@ -13,28 +13,24 @@ public class Aplicacao {
 
 	public static void main(String[] args) throws IOException {
 
-		
 		InputStream input = Aplicacao.class.getClassLoader().getResourceAsStream("config.properties");
 
 		Properties prop = new Properties();
 
-		
 		prop.load(input);
 
 		try {
-			
+
 			Connection conn = DriverManager.getConnection(prop.getProperty("url"), prop);
-			
+
 			Menu menu = new Menu(conn);
-			
+
 			menu.interfaceUsuario();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 
 		}
-
-		System.out.println("Conectado com sucesso!");
 
 	}
 

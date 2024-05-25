@@ -10,13 +10,32 @@ public class Validadores {
 	}
 
 	public static boolean validarCPF(String cpf) {
-		return cpf != null && !cpf.isBlank()
-				&& (cpf.matches("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}") || cpf.matches("\\d{11}"));
+		return cpf != null && !cpf.isBlank() && cpf.matches("\\d{11}");
 
 	}
 
-	public static boolean validarEndereco(String endereco) {
-		return endereco != null && !endereco.isBlank();
+	public static boolean validarCnpj(String cnpj) {
+		return cnpj != null && !cnpj.isBlank() && cnpj.matches("\\d{14}");
+
+	}
+
+	public static boolean validarLogradouro(String logradouro) {
+		return logradouro != null && !logradouro.isBlank();
+
+	}
+
+	public static boolean validarComplemento(String complemento) {
+		return complemento != null && !complemento.isBlank();
+
+	}
+
+	public static boolean validarCEP(String cep) {
+		return cep != null && !cep.isBlank() && cep.matches("\\d{8}");
+
+	}
+
+	public static boolean validarNumero(int numero) {
+		return numero > 0.0;
 
 	}
 

@@ -49,18 +49,18 @@ public class ControladorCliente implements IClienteCRUD {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Digite o código do cliente que deseja buscar: ");
+		System.out.println("Digite o CPF do cliente que deseja buscar: ");
 
-		while (!sc.hasNextInt()) {
-			System.out.println("Código inválido, tente novamente: ");
-			sc.next();
+		String cpf = sc.nextLine();
+
+		while (!Validadores.validarCPF(cpf)) {
+			System.out.println("CPF inválido, tente novamente: ");
+			cpf = sc.nextLine();
 		}
-
-		int codigo = sc.nextInt();
 
 		Cliente cliente = new Cliente();
 
-		cliente.setCodigo(codigo);
+		cliente.setCpf(cpf);
 		
 		return cliente;
 
@@ -112,8 +112,6 @@ public class ControladorCliente implements IClienteCRUD {
 		cliente.setCpf(cpf);
 		cliente.setCelular(celular);
 		cliente.setCodigo(codigo);
-
-		System.out.println("Cliente alterado com sucesso!\n");
 		
 		return cliente;
 
@@ -124,18 +122,18 @@ public class ControladorCliente implements IClienteCRUD {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Digite o código do cliente que deseja excluir: ");
+		System.out.println("Digite o CPF do cliente que deseja excluir: ");
 
-		while (!sc.hasNextInt()) {
-			System.out.println("Código inválido, tente novamente: ");
-			sc.next();
+		String cpf = sc.nextLine();
+
+		while (!Validadores.validarCPF(cpf)) {
+			System.out.println("CPF inválido, tente novamente: ");
+			cpf = sc.nextLine();
 		}
-
-		int codigo = sc.nextInt();
 
 		Cliente cliente = new Cliente();
 
-		cliente.setCodigo(codigo);
+		cliente.setCpf(cpf);
 
 		System.out.println("Cliente excluído com sucesso!\n");
 		

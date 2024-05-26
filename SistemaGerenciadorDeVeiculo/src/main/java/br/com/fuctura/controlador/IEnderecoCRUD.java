@@ -10,12 +10,16 @@ public interface IEnderecoCRUD {
 
 	public Endereco cadastrar(Loja loja);
 
-	public Endereco buscar();
+	public Endereco buscar(Cliente cliente);
+	
+	public Endereco buscar(Loja loja);
 
 	public Endereco alterar(Cliente cliente);
 
 	public Endereco alterar(Loja loja);
 
-	public Endereco excluir();
+	public Endereco excluir(Cliente cliente);
+	
+	public Endereco excluir(Loja loja);
 
 }

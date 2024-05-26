@@ -55,7 +55,7 @@ public class ControladorEndereco implements IEnderecoCRUD {
 		endereco.setComplemento(complemento);
 		endereco.setNumero(numero);
 
-		System.out.println("Endereço cadastrado com sucesso!\n");
+		System.out.println("Cliente cadastrado com sucesso!\n");
 		
 		return endereco;
 
@@ -108,29 +108,33 @@ public class ControladorEndereco implements IEnderecoCRUD {
 		endereco.setComplemento(complemento);
 		endereco.setNumero(numero);
 
-		System.out.println("Endereço cadastrado com sucesso!\n");
+		System.out.println("Loja cadastrada com sucesso!\n");
 		
 		return endereco;
 
 	}
 
 	@Override
-	public Endereco buscar() {
+	public Endereco buscar(Cliente cliente) {
 
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println("Digite o código do endereço que deseja buscar: ");
-
-		while (!sc.hasNextInt()) {
-			System.out.println("ID inválido, tente novamente: ");
-			sc.next();
-		}
-
-		int codigo = sc.nextInt();
+		int codigo_cliente = cliente.getCodigo();
 
 		Endereco endereco = new Endereco();
 
-		endereco.setCodigo(codigo);
+		endereco.setCodigo_cliente(codigo_cliente);;
+		
+		return endereco;
+
+	}
+	
+	@Override
+	public Endereco buscar(Loja loja) {
+
+		int codigo_loja = loja.getCodigo();
+
+		Endereco endereco = new Endereco();
+
+		endereco.setCodigo_loja(codigo_loja);;
 		
 		return endereco;
 
@@ -140,17 +144,8 @@ public class ControladorEndereco implements IEnderecoCRUD {
 	public Endereco alterar(Cliente cliente) {
 
 		Scanner sc = new Scanner(System.in);
-
-		System.out.println("Digite o código do endereco que deseja alterar: ");
-
-		while (!sc.hasNextInt()) {
-			System.out.println("Código inválido, tente novamente: ");
-			sc.next();
-		}
-
-		int codigo = sc.nextInt();
-
-		sc.nextLine();
+		
+		int codigo_cliente = cliente.getCodigo();
 
 		System.out.println("Digite o logradouro: ");
 		String logradouro = sc.nextLine();
@@ -193,9 +188,8 @@ public class ControladorEndereco implements IEnderecoCRUD {
 		endereco.setLogradouro(logradouro);
 		endereco.setComplemento(complemento);
 		endereco.setNumero(numero);
-		endereco.setCodigo(codigo);
-
-		System.out.println("Endereço alterado com sucesso!\n");
+		
+		System.out.println("Cliente alterado com sucesso!\n");
 		
 		return endereco;
 
@@ -206,16 +200,7 @@ public class ControladorEndereco implements IEnderecoCRUD {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Digite o código do endereco que deseja alterar: ");
-
-		while (!sc.hasNextInt()) {
-			System.out.println("Código inválido, tente novamente: ");
-			sc.next();
-		}
-
-		int codigo = sc.nextInt();
-
-		sc.nextLine();
+		int codigo_loja = loja.getCodigo();
 
 		System.out.println("Digite o logradouro: ");
 		String logradouro = sc.nextLine();
@@ -258,35 +243,37 @@ public class ControladorEndereco implements IEnderecoCRUD {
 		endereco.setLogradouro(logradouro);
 		endereco.setComplemento(complemento);
 		endereco.setNumero(numero);
-		endereco.setCodigo(codigo);
 
-		System.out.println("Endereço alterado com sucesso!\n");
+		System.out.println("Loja alterada com sucesso!\n");
 		
 		return endereco;
 
 	}
 
 	@Override
-	public Endereco excluir() {
+	public Endereco excluir(Cliente cliente) {
 
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println("Digite o código do endereço que deseja excluir: ");
-
-		while (!sc.hasNextInt()) {
-			System.out.println("Código inválido, tente novamente: ");
-			sc.next();
-		}
-
-		int codigo = sc.nextInt();
+		int codigo_cliente = cliente.getCodigo();
 
 		Endereco endereco = new Endereco();
-		endereco.setCodigo(codigo);
 
-		System.out.println("Endereço excluído com sucesso!\n");
-
+		endereco.setCodigo_cliente(codigo_cliente);;
+		
 		return endereco;
 
 	}
+
+@Override
+public Endereco excluir(Loja loja) {
+
+	int codigo_loja = loja.getCodigo();
+
+	Endereco endereco = new Endereco();
+
+	endereco.setCodigo_loja(codigo_loja);;
+	
+	return endereco;
+
+}
 
 }

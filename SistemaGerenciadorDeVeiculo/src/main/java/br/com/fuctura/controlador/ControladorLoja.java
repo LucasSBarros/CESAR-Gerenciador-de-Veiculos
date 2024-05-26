@@ -42,7 +42,7 @@ public class ControladorLoja implements ILojaCRUD {
 		loja.setNome(nome);
 		loja.setCnpj(cnpj);
 		loja.setTelefone(telefone);
-		
+
 		return loja;
 	}
 
@@ -51,19 +51,19 @@ public class ControladorLoja implements ILojaCRUD {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Digite o código da loja que deseja buscar: \n");
+		System.out.println("Digite o CNPJ da loja que deseja buscar: \n");
 
-		while (!sc.hasNextInt()) {
-			System.out.println("Código inválido, tente novamente: ");
-			sc.next();
+		String cnpj = sc.nextLine();
+
+		while (!Validadores.validarCnpj(cnpj)) {
+			System.out.println("CNPJ inválido, tente novamente: ");
+			cnpj = sc.nextLine();
 		}
-
-		int codigo = sc.nextInt();
 
 		Loja loja = new Loja();
 
-		loja.setCodigo(codigo);
-		
+		loja.setCnpj(cnpj);
+
 		return loja;
 
 	}
@@ -116,8 +116,6 @@ public class ControladorLoja implements ILojaCRUD {
 		loja.setTelefone(telefone);
 		loja.setCodigo(codigo);
 
-		System.out.println("Loja alterada com sucesso!\n");
-		
 		return loja;
 
 	}
@@ -127,17 +125,18 @@ public class ControladorLoja implements ILojaCRUD {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Digite o código da loja que deseja excluir: ");
+		System.out.println("Digite o CNPJ da loja que deseja excluir: ");
 
-		while (!sc.hasNextInt()) {
-			System.out.println("ID inválido, tente novamente: ");
-			sc.next();
+		String cnpj = sc.nextLine();
+
+		while (!Validadores.validarCnpj(cnpj)) {
+			System.out.println("CNPJ inválido, tente novamente: ");
+			cnpj = sc.nextLine();
 		}
 
-		int codigo = sc.nextInt();
-
 		Loja loja = new Loja();
-		loja.setCodigo(codigo);
+		loja.setCnpj(cnpj);
+		;
 
 		System.out.println("Loja excluída com sucesso!\n");
 

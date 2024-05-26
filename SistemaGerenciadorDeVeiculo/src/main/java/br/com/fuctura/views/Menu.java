@@ -125,9 +125,10 @@ public class Menu {
 
 				Loja loja = controladorLoja.buscar();
 				daoLoja.buscar(conn, loja);
+				daoLoja.instruir(conn, loja);
 
-				Endereco endereco = controladorEndereco.buscar();
-				daoEndereco.buscar(conn, endereco);
+				Endereco endereco = controladorEndereco.buscar(loja);
+				daoEndereco.buscarLoja(conn, endereco);
 
 				frenteDeLoja();
 
@@ -153,6 +154,7 @@ public class Menu {
 
 				Vendedor vendedor = controladorVendedor.buscar();
 				daoVendedor.buscar(conn, vendedor);
+				
 				frenteDeLoja();
 
 			} else if (op.equalsIgnoreCase("b")) {
@@ -188,9 +190,10 @@ public class Menu {
 
 				Cliente cliente = controladorCliente.buscar();
 				daoCliente.buscar(conn, cliente);
+				daoCliente.instruir(conn, cliente);
 
-				Endereco endereco = controladorEndereco.buscar();
-				daoEndereco.buscar(conn, endereco);
+				Endereco endereco = controladorEndereco.buscar(cliente);
+				daoEndereco.buscarCliente(conn, endereco);
 
 				frenteDeLoja();
 
@@ -285,7 +288,6 @@ public class Menu {
 				daoVeiculo.instruir(conn, veiculo);
 				
 				Tipo tipo = controladorTipo.excluir(veiculo);
-				
 				daoTipo.excluir(conn, tipo);
 				daoVeiculo.excluir(conn, veiculo);
 
@@ -335,6 +337,10 @@ public class Menu {
 			} else if (op.equalsIgnoreCase("b")) {
 
 				Loja loja = controladorLoja.excluir();
+				daoLoja.instruir(conn, loja);
+				
+				Endereco endereco = controladorEndereco.excluir(loja);
+				daoEndereco.excluirLoja(conn, endereco);
 				daoLoja.excluir(conn, loja);
 
 				manutencaoNoCadastro();
@@ -343,6 +349,10 @@ public class Menu {
 
 				Loja loja = controladorLoja.alterar();
 				daoLoja.alterar(conn, loja);
+				daoLoja.instruir(conn, loja);
+				
+				Endereco endereco = controladorEndereco.alterar(loja);
+				daoEndereco.alterarLoja(conn, endereco);
 
 				manutencaoNoCadastro();
 
@@ -419,6 +429,10 @@ public class Menu {
 			} else if (op.equalsIgnoreCase("b")) {
 
 				Cliente cliente = controladorCliente.excluir();
+				daoCliente.instruir(conn, cliente);
+				
+				Endereco endereco = controladorEndereco.excluir(cliente);
+				daoEndereco.excluirCliente(conn, endereco);
 				daoCliente.excluir(conn, cliente);
 
 				manutencaoNoCadastro();
@@ -427,6 +441,10 @@ public class Menu {
 
 				Cliente cliente = controladorCliente.alterar();
 				daoCliente.alterar(conn, cliente);
+				daoCliente.instruir(conn, cliente);
+				
+				Endereco endereco = controladorEndereco.alterar(cliente);
+				daoEndereco.alterarCliente(conn, endereco);
 
 				manutencaoNoCadastro();
 

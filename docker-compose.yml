@@ -1,7 +1,6 @@
 services:
   javaapp:
-    build: ./SistemaGerenciadorDeVeiculo/
-    command: sh -c "sleep 10s ; java ./SistemaGerenciadorDeVeiculo/src/main/java/br/com/fuctura/Aplicacao.java"
+    build: ./java-app/
     depends_on:
       - db
 

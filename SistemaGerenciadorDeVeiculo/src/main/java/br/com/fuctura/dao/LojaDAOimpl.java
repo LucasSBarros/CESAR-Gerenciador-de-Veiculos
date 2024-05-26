@@ -34,11 +34,11 @@ public class LojaDAOimpl implements ILojaDAO {
 
 		try {
 
-			String comandoDelete = "DELETE FROM loja WHERE codigo_loja = ?;";
+			String comandoDelete = "DELETE FROM loja WHERE cnpj = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoDelete);
 
-			pstm.setInt(1, loja.getCodigo());
+			pstm.setString(1, loja.getCnpj());
 
 			pstm.execute();
 
@@ -53,7 +53,7 @@ public class LojaDAOimpl implements ILojaDAO {
 
 		try {
 
-			String comandoAlterar = "UPDATE loja SET nome = ?, cnpj - ?, telefone = ? WHERE codigo_loja = ?;";
+			String comandoAlterar = "UPDATE loja SET nome = ?, cnpj = ?, telefone = ? WHERE codigo_loja = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoAlterar);
 
@@ -75,11 +75,11 @@ public class LojaDAOimpl implements ILojaDAO {
 
 		try {
 
-			String comandoBuscar = "SELECT codigo_loja, nome, cnpj, telefone FROM loja WHERE codigo_loja = ?;";
+			String comandoBuscar = "SELECT codigo_loja, nome, cnpj, telefone FROM loja WHERE cnpj = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoBuscar);
 
-			pstm.setInt(1, loja.getCodigo());
+			pstm.setString(1, loja.getCnpj());
 
 			pstm.execute();
 
@@ -91,8 +91,6 @@ public class LojaDAOimpl implements ILojaDAO {
 				String cnpj = rs.getString("cnpj");
 				String telefone = rs.getString("telefone");
 
-				System.out.println(
-						"Código: " + codigo + ", Nome: " + nome + ", CNPJ: " + cnpj + ", Telefone: " + telefone);
 			}
 
 		} catch (Exception e) {

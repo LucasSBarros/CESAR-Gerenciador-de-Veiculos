@@ -10,12 +10,16 @@ public interface IEnderecoDAO {
 
 	void salvarCliente(Connection conn, Endereco endereco);
 
-	void excluir(Connection conn, Endereco endereco);
+	void excluirLoja(Connection conn, Endereco endereco);
+	
+	void excluirCliente(Connection conn, Endereco endereco);
 
 	void alterarLoja(Connection conn, Endereco endereco);
 
 	void alterarCliente(Connection conn, Endereco endereco);
 
-	void buscar(Connection conn, Endereco endereco);
+	void buscarLoja(Connection conn, Endereco endereco);
+	
+	void buscarCliente(Connection conn, Endereco endereco);
 
 }

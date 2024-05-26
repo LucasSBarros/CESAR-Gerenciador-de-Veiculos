@@ -34,11 +34,11 @@ public class ClienteDAOImpl implements IClienteDAO {
 
 		try {
 
-			String comandoDelete = "DELETE FROM cliente WHERE codigo_cliente = ?;";
+			String comandoDelete = "DELETE FROM cliente WHERE cpf = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoDelete);
 
-			pstm.setInt(1, cliente.getCodigo());
+			pstm.setString(1, cliente.getCpf());
 
 			pstm.execute();
 
@@ -74,11 +74,11 @@ public class ClienteDAOImpl implements IClienteDAO {
 
 		try {
 
-			String comandoBuscar = "SELECT codigo_cliente, nome, cpf, celular FROM cliente WHERE codigo_cliente = ?;";
+			String comandoBuscar = "SELECT codigo_cliente, nome, cpf, celular FROM cliente WHERE cpf = ?;";
 
 			PreparedStatement pstm = conn.prepareStatement(comandoBuscar);
 
-			pstm.setInt(1, cliente.getCodigo());
+			pstm.setString(1, cliente.getCpf());
 
 			pstm.execute();
 
@@ -90,7 +90,6 @@ public class ClienteDAOImpl implements IClienteDAO {
 				String cpf = rs.getString("cpf");
 				String celular = rs.getString("celular");
 
-				System.out.println("Código: " + codigo + ", Nome: " + nome + ", CPF: " + cpf + ", Celular: " + celular);
 			}
 
 		} catch (Exception e) {

@@ -1,9 +1,5 @@
 FROM openjdk:17
 
-WORKDIR /app
+ADD target/SistemaGerenciadorDeVeiculo-0.0.1-SNAPSHOT.jar app/SistemaGerenciadorDeVeiculo-0.0.1-SNAPSHOT.jar
 
-COPY target/SistemaGerenciadorDeVeiculo-0.0.1-SNAPSHOT.jar .
-
-EXPOSE 8080
-
-CMD ["java", "-jar", "SistemaGerenciadorDeVeiculo-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT [ "java", "-jar", "app/SistemaGerenciadorDeVeiculo-0.0.1-SNAPSHOT.jar" ]

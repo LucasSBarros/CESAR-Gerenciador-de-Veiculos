@@ -10,6 +10,6 @@ services:
     environment:
       POSTGRES_DATABASE: 'db'
       POSTGRES_USERNAME: 'postgres'
-      POSTGRES_PASSWORD: '12345'
+      POSTGRES_PASSWORD: '*'
     ports:
-      - '3306:3306'
+      - '5432:5432'
